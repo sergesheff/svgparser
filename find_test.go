@@ -1,9 +1,8 @@
 package svgparser_test
 
 import (
+	"svgparser"
 	"testing"
-
-	"github.com/JoshVarga/svgparser"
 )
 
 func testElement() *svgparser.Element {

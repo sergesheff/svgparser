@@ -3,9 +3,8 @@ package svgparser_test
 import (
 	"fmt"
 	"strings"
-
-	"github.com/JoshVarga/svgparser"
-	"github.com/JoshVarga/svgparser/utils"
+	"svgparser"
+	"svgparser/utils"
 )
 
 func ExampleParse() {

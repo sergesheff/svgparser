@@ -3,7 +3,7 @@ package utils_test
 import (
 	"testing"
 
-	"."
+	"svgparser/utils"
 )
 
 func TestPathParser(t *testing.T) {
