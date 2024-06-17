@@ -1,4 +1,4 @@
-module svgparser
+module github.com/sergesheff/svgparser
 
 go 1.20.0
 

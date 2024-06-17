@@ -3,7 +3,7 @@ package svgparser_test
 import (
 	"strings"
 
-	"svgparser"
+	"github.com/sergesheff/svgparser"
 )
 
 func element(name string, attrs map[string]string) *svgparser.Element {

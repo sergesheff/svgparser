@@ -3,7 +3,7 @@ package utils_test
 import (
 	"testing"
 
-	"svgparser/utils"
+	"github.com/sergesheff/svgparser/utils"
 )
 
 func TestStyleParser(t *testing.T) {

@@ -1,7 +1,7 @@
 package svgparser_test
 
 import (
-	"svgparser"
+	"github.com/sergesheff/svgparser"
 	"testing"
 )
 
