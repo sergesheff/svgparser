@@ -23,11 +23,12 @@ type Element struct {
 	Name       string
 	Attributes map[string]string
 	Children   []*Element
+	Parent     *Element
 	Content    string
 }
 
 // NewElement creates element from decoder token.
-func NewElement(token xml.StartElement) *Element {
+func NewElement(token xml.StartElement, parent *Element) *Element {
 	element := &Element{}
 	attributes := make(map[string]string)
 	for _, attr := range token.Attr {
@@ -35,6 +36,8 @@ func NewElement(token xml.StartElement) *Element {
 	}
 	element.Name = token.Name.Local
 	element.Attributes = attributes
+	element.Parent = parent
+
 	return element
 }
 
@@ -74,7 +77,7 @@ func DecodeFirst(decoder *xml.Decoder) (*Element, error) {
 
 		switch element := token.(type) {
 		case xml.StartElement:
-			return NewElement(element), nil
+			return NewElement(element, nil), nil
 		}
 	}
 	return &Element{}, nil
@@ -94,7 +97,7 @@ func (e *Element) Decode(decoder *xml.Decoder) error {
 
 		switch element := token.(type) {
 		case xml.StartElement:
-			nextElement := NewElement(element)
+			nextElement := NewElement(element, e)
 			err := nextElement.Decode(decoder)
 			if err != nil {
 				return err
@@ -158,6 +161,12 @@ func (el Element) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 
 	if err := e.EncodeToken(openToken); err != nil {
 		return err
+	}
+
+	if len(el.Content) > 0 {
+		if err := e.EncodeToken(xml.CharData(el.Content)); err != nil {
+			return err
+		}
 	}
 
 	for _, c := range el.Children {
